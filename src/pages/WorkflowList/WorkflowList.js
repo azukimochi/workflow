@@ -1,6 +1,7 @@
 import React, { Component } from "react"
 import Workflow from "../../components/Workflow/Workflow.json"
 import { DragDropContext, Droppable, Draggable } from 'react-beautiful-dnd';
+import CancelModal from "../../components/CancelModal/CancelModal"
 
 const workFlowStages = Workflow.Stages
 // fake data generator
@@ -57,7 +58,9 @@ const getListStyle = isDraggingOver => ({
   });
 
 class WorkflowList extends Component {
-    state = {}
+    state = {
+        modalIsOpen: false
+    }
     
     id2List = {
         droppable: 'availableActions',
@@ -134,7 +137,21 @@ class WorkflowList extends Component {
 
     handleDiscard = event => {
         this.getSavedData()
+        this.closeModal()
     }
+
+    openModal = () => {
+        this.setState({modalIsOpen: true},
+        () => console.log("modal is open"));
+      }
+     
+      afterOpenModal = () => {
+        this.subtitle.style.color = '#f00';
+      }
+     
+      closeModal = () => {
+        this.setState({modalIsOpen: false});
+      }
 
     // Normally you would want to split things out into separate components.
     // But in this example everything is just done in one place for simplicity
@@ -209,8 +226,17 @@ class WorkflowList extends Component {
 
             <div>
                 <button onClick={this.handleSave}>Save</button>
-                <button onClick={this.handleDiscard}>Cancel</button>
+                <button onClick={this.openModal}>Cancel</button>
                 </div>
+
+            <div>
+            <CancelModal
+            modalIsOpen={this.state.modalIsOpen}
+            closeModal={this.closeModal}
+            handleDiscard={this.handleDiscard}
+          />
+
+            </div>
     </div>
         )
     } else {
