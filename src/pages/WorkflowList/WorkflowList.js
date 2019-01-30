@@ -15,8 +15,6 @@ const reorder = (list, startIndex, endIndex) => {
     const result = Array.from(list);
     const [removed] = result.splice(startIndex, 1);
     result.splice(endIndex, 0, removed);
-
-    console.log(result);
     return result;
 };
 
@@ -33,8 +31,6 @@ const move = (source, destination, droppableSource, droppableDestination) => {
     const result = {};
     result[droppableSource.droppableId] = sourceClone;
     result[droppableDestination.droppableId] = destClone;
-
-    console.log(result);
     return result;
 };
 
@@ -53,12 +49,6 @@ const getItemStyle = (isDragging, draggableStyle) => ({
     ...draggableStyle
 });
 
-// const getListStyle = isDraggingOver => ({
-//     background: isDraggingOver ? 'lightblue' : 'lightgrey',
-//     padding: grid,
-//     width: 250
-// });
-
 const getListStyle = isDraggingOver => ({
     background: isDraggingOver ? 'lightblue' : 'lightgrey',
     display: 'flex',
@@ -67,26 +57,29 @@ const getListStyle = isDraggingOver => ({
   });
 
 class WorkflowList extends Component {
-    state = {
-        // items: getItems(10),
-        // selected: getItems(5, 10)
-        // availableActions: workFlowStages.filter(stage => !stage.prevStage && !stage.nextStage), 
-        // selectedActions: workFlowStages.filter(stage => stage.prevStage || stage.nextStage)
-    };
+    state = {}
+    
+    id2List = {
+        droppable: 'availableActions',
+        droppable2: 'selectedActions'
+    }
 
     componentDidMount = () => {
-        console.log("mounted")
+        this.getSavedData()
+    }
+    
+    getSavedData = () => {
         let savedData = JSON.parse(localStorage.getItem("savedWorkFlow"))
         if (savedData) {
             this.setState({
                 availableActions: savedData.availableActions,
                 selectedActions: savedData.selectedActions
-            }, () => console.log(this.state))
+            })
         } else {
             this.setState({
                 availableActions: workFlowStages.filter(stage => !stage.prevStage && !stage.nextStage), 
                 selectedActions: workFlowStages.filter(stage => stage.prevStage || stage.nextStage)
-            },  () => console.log(this.state))
+            })
         }
     }
     /**
@@ -94,16 +87,6 @@ class WorkflowList extends Component {
      * the IDs of the droppable container to the names of the
      * source arrays stored in the state.
      */
-    id2List = {
-        droppable: 'availableActions',
-        droppable2: 'selectedActions'
-    };
-
-    // id2List = {
-    //     availableActions: 'availableActions',
-    //     selectedActions: 'selectedActions'
-    // };
-
 
     getList = id => this.state[this.id2List[id]];
 
@@ -140,16 +123,17 @@ class WorkflowList extends Component {
             this.setState({
                 availableActions: result.droppable,
                 selectedActions: result.droppable2
-            }, () => console.log(this.state));
+            });
         }
     };
 
     handleSave = event => {
-        console.log("save button was clicked")
         let dataStr = JSON.stringify(this.state)
-        console.log(dataStr)
         localStorage.setItem("savedWorkFlow", dataStr)
+    }
 
+    handleDiscard = event => {
+        this.getSavedData()
     }
 
     // Normally you would want to split things out into separate components.
@@ -225,6 +209,7 @@ class WorkflowList extends Component {
 
             <div>
                 <button onClick={this.handleSave}>Save</button>
+                <button onClick={this.handleDiscard}>Cancel</button>
                 </div>
     </div>
         )
