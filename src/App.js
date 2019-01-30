@@ -1,6 +1,7 @@
 import React, { Component } from "react"
 import Workflow from "./components/Cards/Workflow.json"
 import { DragDropContext, Droppable, Draggable } from 'react-beautiful-dnd';
+// import "./App.css"
 
 const workFlowStages = Workflow.Stages
 // fake data generator
@@ -53,11 +54,18 @@ const getItemStyle = (isDragging, draggableStyle) => ({
     ...draggableStyle
 });
 
+// const getListStyle = isDraggingOver => ({
+//     background: isDraggingOver ? 'lightblue' : 'lightgrey',
+//     padding: grid,
+//     width: 250
+// });
+
 const getListStyle = isDraggingOver => ({
     background: isDraggingOver ? 'lightblue' : 'lightgrey',
+    display: 'flex',
     padding: grid,
-    width: 250
-});
+    overflow: 'auto',
+  });
 
 class App extends Component {
     state = {
@@ -68,17 +76,23 @@ class App extends Component {
     };
 
     componentDidMount = () => {
-        console.log({workFlowStages})
+        console.log("mounted")
     }
     /**
      * A semi-generic way to handle multiple lists. Matches
      * the IDs of the droppable container to the names of the
      * source arrays stored in the state.
      */
+    // id2List = {
+    //     droppable: 'availableActions',
+    //     droppable2: 'selectedActions'
+    // };
+
     id2List = {
-        droppable: 'availableActions',
-        droppable2: 'selectedActions'
+        availableActions: 'availableActions',
+        selectedActions: 'selectedActions'
     };
+
 
     getList = id => this.state[this.id2List[id]];
 
@@ -99,7 +113,7 @@ class App extends Component {
 
             let state = { items };
 
-            if (source.droppableId === 'droppable2') {
+            if (source.droppableId === 'selectedActions') {
                 state = { selectedActions: items };
             }
 
@@ -113,9 +127,9 @@ class App extends Component {
             );
 
             this.setState({
-                availableActions: result.droppable,
-                selectedActions: result.droppable2
-            });
+                availableActions: result.availableActions,
+                selectedActions: result.selectedActions
+            }, () => console.log(this.state));
         }
     };
 
@@ -124,11 +138,13 @@ class App extends Component {
     render() {
         return (
             <DragDropContext onDragEnd={this.onDragEnd}>
-                <Droppable droppableId="droppable">
+                <Droppable droppableId="availableActions" direction="horizontal">
                     {(provided, snapshot) => (
                         <div
                             ref={provided.innerRef}
-                            style={getListStyle(snapshot.isDraggingOver)}>
+                            style={getListStyle(snapshot.isDraggingOver)}
+                            {...provided.droppableProps}
+                            >
                             {this.state.availableActions.map((item, index) => (
                                 <Draggable
                                     key={item.id}
@@ -153,12 +169,13 @@ class App extends Component {
                     )}
                 </Droppable>
                 <br />
-                <Droppable droppableId="droppable2">
+                <Droppable droppableId="selectedActions" direction="horizontal">
                     {(provided, snapshot) => (
                         <div
                             ref={provided.innerRef}
-                            style={getListStyle(snapshot.isDraggingOver)}>
-                            
+                            style={getListStyle(snapshot.isDraggingOver)}
+                            {...provided.droppableProps}
+                            >
                             {this.state.selectedActions.map((item, index) => 
                                 // return item.nextStage !== null || item.prevStage !== null ? 
                                 (<Draggable
@@ -166,7 +183,7 @@ class App extends Component {
                                     draggableId={item.id}
                                     index={index}>
                                     {(provided, snapshot) => (
-                                        <div
+                                        <div className="horizontal"
                                             ref={provided.innerRef}
                                             {...provided.draggableProps}
                                             {...provided.dragHandleProps}
