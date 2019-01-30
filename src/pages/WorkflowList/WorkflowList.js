@@ -1,15 +1,16 @@
 import React, { Component } from "react"
 import Workflow from "../../components/Workflow/Workflow.json"
-import { DragDropContext, Droppable, Draggable } from 'react-beautiful-dnd';
 import CancelModal from "../../components/CancelModal/CancelModal"
+import DragNDropCanvasses from "../../components/DragNDropCanvases/DragNDropCanvases"
+// import { DragDropContext, Droppable, Draggable } from 'react-beautiful-dnd';
 
 const workFlowStages = Workflow.Stages
 // fake data generator
-const getItems = (count, offset = 0) =>
-    Array.from({ length: count }, (v, k) => k).map(k => ({
-        id: `item-${k + offset}`,
-        content: `item ${k + offset}`
-    }));
+// const getItems = (count, offset = 0) =>
+//     Array.from({ length: count }, (v, k) => k).map(k => ({
+//         id: `item-${k + offset}`,
+//         content: `item ${k + offset}`
+//     }));
 
 // a little function to help us with reordering the result
 const reorder = (list, startIndex, endIndex) => {
@@ -35,27 +36,27 @@ const move = (source, destination, droppableSource, droppableDestination) => {
     return result;
 };
 
-const grid = 8;
+// const grid = 8;
 
-const getItemStyle = (isDragging, draggableStyle) => ({
-    // some basic styles to make the items look a bit nicer
-    userSelect: 'none',
-    padding: grid * 2,
-    margin: `0 0 ${grid}px 0`,
+// const getItemStyle = (isDragging, draggableStyle) => ({
+//     // some basic styles to make the items look a bit nicer
+//     userSelect: 'none',
+//     padding: grid * 2,
+//     margin: `0 0 ${grid}px 0`,
 
-    // change background colour if dragging
-    background: isDragging ? 'lightgreen' : 'grey',
+//     // change background colour if dragging
+//     background: isDragging ? 'lightgreen' : 'grey',
 
-    // styles we need to apply on draggables
-    ...draggableStyle
-});
+//     // styles we need to apply on draggables
+//     ...draggableStyle
+// });
 
-const getListStyle = isDraggingOver => ({
-    background: isDraggingOver ? 'lightblue' : 'lightgrey',
-    display: 'flex',
-    padding: grid,
-    overflow: 'auto',
-  });
+// const getListStyle = isDraggingOver => ({
+//     background: isDraggingOver ? 'lightblue' : 'lightgrey',
+//     display: 'flex',
+//     padding: grid,
+//     overflow: 'auto',
+//   });
 
 class WorkflowList extends Component {
     state = {
@@ -162,7 +163,13 @@ class WorkflowList extends Component {
         if (this.state.availableActions && this.state.selectedActions) {
         return (
             <div className="container">
-            <DragDropContext onDragEnd={this.onDragEnd}>
+
+            <DragNDropCanvasses
+            onDragEnd={this.onDragEnd}
+            availableActions={this.state.availableActions}
+            selectedActions={this.state.selectedActions}
+            />
+            {/* <DragDropContext onDragEnd={this.onDragEnd}>
                 <Droppable droppableId="droppable" direction="horizontal">
                     {(provided, snapshot) => (
                         <div
@@ -225,7 +232,7 @@ class WorkflowList extends Component {
                         </div>
                     )}
                 </Droppable>
-            </DragDropContext>
+            </DragDropContext> */}
 
             <div>
                 <button onClick={this.handleSave}>Save</button>
