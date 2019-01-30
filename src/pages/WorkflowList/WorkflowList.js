@@ -140,6 +140,11 @@ class WorkflowList extends Component {
         this.closeModal()
     }
 
+    goToAdminPage = event => {
+        event.preventDefault()
+        this.props.history.push("/")
+    }
+
     openModal = () => {
         this.setState({modalIsOpen: true},
         () => console.log("modal is open"));
@@ -153,8 +158,6 @@ class WorkflowList extends Component {
         this.setState({modalIsOpen: false});
       }
 
-    // Normally you would want to split things out into separate components.
-    // But in this example everything is just done in one place for simplicity
     render() {
         if (this.state.availableActions && this.state.selectedActions) {
         return (
@@ -227,6 +230,7 @@ class WorkflowList extends Component {
             <div>
                 <button onClick={this.handleSave}>Save</button>
                 <button onClick={this.openModal}>Cancel</button>
+                <button onClick={this.goToAdminPage}>Go to the Admin Page</button>
                 </div>
 
             <div>
@@ -235,7 +239,6 @@ class WorkflowList extends Component {
             closeModal={this.closeModal}
             handleDiscard={this.handleDiscard}
           />
-
             </div>
     </div>
         )
