@@ -61,9 +61,9 @@ const getListStyle = isDraggingOver => ({
 
 class App extends Component {
     state = {
-        items: getItems(10),
+        // items: getItems(10),
         // selected: getItems(5, 10)
-        // availableActions: workFlowStages.filter(stage => !stage.prevStage && !stage.nextStage), 
+        availableActions: workFlowStages.filter(stage => !stage.prevStage && !stage.nextStage), 
         selectedActions: workFlowStages.filter(stage => stage.prevStage || stage.nextStage)
     };
 
@@ -76,7 +76,7 @@ class App extends Component {
      * source arrays stored in the state.
      */
     id2List = {
-        droppable: 'items',
+        droppable: 'availableActions',
         droppable2: 'selectedActions'
     };
 
@@ -113,7 +113,7 @@ class App extends Component {
             );
 
             this.setState({
-                items: result.droppable,
+                availableActions: result.droppable,
                 selectedActions: result.droppable2
             });
         }
@@ -129,7 +129,7 @@ class App extends Component {
                         <div
                             ref={provided.innerRef}
                             style={getListStyle(snapshot.isDraggingOver)}>
-                            {this.state.items.map((item, index) => (
+                            {this.state.availableActions.map((item, index) => (
                                 <Draggable
                                     key={item.id}
                                     draggableId={item.id}
@@ -143,7 +143,7 @@ class App extends Component {
                                                 snapshot.isDragging,
                                                 provided.draggableProps.style
                                             )}>
-                                            {item.content}
+                                            {item.action}
                                         </div>
                                     )}
                                 </Draggable>
