@@ -125,6 +125,7 @@ class WorkflowList extends Component {
             if (i === 0) {
                 data[i].isStart = true
                 data[i].prevStage = null
+                data[i].nextStage = data[i + 1] ? data[i + 1].id : null
             } else {
                 data[i].isStart = false
                 data[i].prevStage = data[i - 1].id

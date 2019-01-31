@@ -17,3 +17,35 @@ header {
     margin-top: 2%;
     right: 12%
 }
+
+
+@media only screen and (max-width: 1200px) {
+    header {
+      margin: 30% 30% 0 40%;
+      color: white;
+      font-weight: bold;
+      width: 30%;
+      text-align: center;
+    }
+
+    #toWorkflowBtn {
+      margin: 2% 35% 0 35%;
+      width: 30%;
+    }
+}
+
+@media only screen and (max-width: 670px) {
+    #toWorkflowBtn {
+      font-size: 20px;
+      margin: 2% 25% 0 35%;
+      width: 40%;
+    }
+}
+
+@media only screen and (max-width: 556px) {
+    header {
+      font-weight: 100;
+      color: orange;
+    }
+
+}

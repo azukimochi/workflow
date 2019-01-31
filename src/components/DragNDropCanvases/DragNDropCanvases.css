@@ -1,6 +1,7 @@
 #canvases {
     position: relative;
     top: 25em;
+    left: 15em;
     width: 60%;
 }
 
@@ -18,4 +19,11 @@ h3 {
 .canvas {
     border: 0.5px solid orange;
     border-radius: 7px;
+}
+
+
+@media only screen and (max-width: 1034px) {
+    #canvases {
+      left: 5em;
+    }
 }

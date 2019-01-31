@@ -33,7 +33,7 @@ const CancelModal = props => {
           <button className="ui green button" onClick={props.closeModal}>
             <i className="edit icon"></i>
             I want to keep editing
-            </button>
+          </button>
           <button className="ui red button" onClick={() => props.handleDiscard()}>
             <i className="trash alternate icon"></i>
             I want to cancel
