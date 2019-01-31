@@ -1,5 +1,6 @@
-import React from 'react';
-import Modal from 'react-modal';
+import React from 'react'
+import Modal from 'react-modal'
+import "./CancelModal.css"
 
 const customStyles = {
   content: {
@@ -29,12 +30,12 @@ const CancelModal = props => {
           <h2>Are you sure?</h2>
           <div className="modalBlurb">If you cancel, your workflow will not be saved.</div>
           <br />
-          <button onClick={props.closeModal}>
-            <i className="fa fa-times"></i>
-            I want to keep working
+          <button className="ui green button" onClick={props.closeModal}>
+            <i className="edit icon"></i>
+            I want to keep editing
             </button>
-          <button onClick={() => props.handleDiscard()}>
-            <i className="fa fa-check"></i>
+          <button className="ui red button" onClick={() => props.handleDiscard()}>
+            <i className="trash alternate icon"></i>
             I want to cancel
             </button>
         </div>

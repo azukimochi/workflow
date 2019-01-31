@@ -167,15 +167,10 @@ class WorkflowList extends Component {
                             <div className="col-xl-4 offset-xl-4">
                                 <div className="row">
                                     <div className="col">
-                                        <div className="ui green animated button" tabIndex="0" onClick={this.handleSave}>
-                                            <div className="visible content">Save</div>
-                                            <div className="hidden content">
-                                                <i className="save icon"></i>
-                                            </div>
-                                        </div>
+                                        <button className="ui green button" onClick={this.handleSave}>
+                                            Save
+                                        </button>
                                     </div>
-
-
 
                                     <div className="col">
                                         <button className="ui red button" onClick={this.openModal}>
@@ -193,7 +188,6 @@ class WorkflowList extends Component {
                             </div>
                         </div>
                     </div>
-
                     <div>
 
                         <CancelModal
