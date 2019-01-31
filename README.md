@@ -10,6 +10,7 @@ This app aims to be a mock up of a workflow management feature for an admin port
 1. One for available actions to add into your current workflow
 2. One for the actions you have already integrated into your workflow
 
+* The workflow and actions are loaded from a JSON file unless previously saved data exists in the local storage. 
 * The admin can drag available actions into the workflow canvas, thus altering their team's workflow however they see fit. 
 * The admin must click the Save button in order to save the workflow changes to memory.  Currently, this app only runs in the browser, so it saves the workflow in the local storage.
 * The admin can discard changes by clicking the Cancel button.  A modal will appear to ensure admins encounter a verification process before discarding the changes. 
