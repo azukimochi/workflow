@@ -1,68 +1,31 @@
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+# Workflow Manager
 
-## Available Scripts
+## Problem to Solve/Purpose
 
-In the project directory, you can run:
+This app aims to be a mock up of a workflow management feature for an admin portal. 
 
-### `npm start`
+## Main Functionalities
 
-Runs the app in the development mode.<br>
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+* There will be two drag and drop canvases: 
+1. One for available actions to add into your current workflow
+2. One for the actions you have already integrated into your workflow
 
-The page will reload if you make edits.<br>
-You will also see any lint errors in the console.
+* The admin can drag available actions into the workflow canvas, thus altering their team's workflow however they see fit. 
+* The admin must click the Save button in order to save the workflow changes to memory.  Currently, this app only runs in the browser, so it saves the workflow in the local storage.
+* The admin can discard changes by clicking the Cancel button.  A modal will appear to ensure admins encounter a verification process before discarding the changes. 
+* The admin can go between the Admin main page and the Workflow Management page
 
-### `npm test`
+## Technologies/Tools
 
-Launches the test runner in the interactive watch mode.<br>
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+React.js, CSS, YARN
 
-### `npm run build`
+## Installation/Using the Deployed App 
 
-Builds the app for production to the `build` folder.<br>
-It correctly bundles React in production mode and optimizes the build for the best performance.
+* In the command line, run `yarn install` at the root to install all dependencies. 
+* Cd back to the root after installing all the node modules and run `yarn start`
 
-The build is minified and the filenames include the hashes.<br>
-Your app is ready to be deployed!
+## Creators
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+This app was created by:
 
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
-
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (Webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
-
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/code-splitting
-
-### Analyzing the Bundle Size
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size
-
-### Making a Progressive Web App
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app
-
-### Advanced Configuration
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/advanced-configuration
-
-### Deployment
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/deployment
-
-### `npm run build` fails to minify
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify
+* [azukimochi](https://github.com/azukimochi)
