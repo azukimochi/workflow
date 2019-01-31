@@ -1,0 +1,19 @@
+.body {
+    background-image: url("./images/workBG1.jpg");
+    background-size: cover;
+}
+
+header {
+    color: orange;
+    font-weight: 200;
+    font-size: 55px;
+    margin-top: 30%;
+    right: 18%;
+    position: relative;
+}
+
+#toWorkflowBtn {
+    font-size: 25px;
+    margin-top: 2%;
+    right: 12%
+}
