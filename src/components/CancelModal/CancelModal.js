@@ -23,7 +23,6 @@ const CancelModal = props => {
         onRequestClose={props.closeModal}
         style={customStyles}
       >
-
         <div className="modalContainer">
           <p id="modalClose" onClick={props.closeModal}>x</p>
           <br />
@@ -31,11 +30,11 @@ const CancelModal = props => {
           <div className="modalBlurb">If you cancel, your workflow will not be saved.</div>
           <br />
           <button onClick={props.closeModal}>
-            <i className="fa fa-times"></i> 
+            <i className="fa fa-times"></i>
             I want to keep working
             </button>
           <button onClick={() => props.handleDiscard()}>
-            <i className="fa fa-check"></i> 
+            <i className="fa fa-check"></i>
             I want to cancel
             </button>
         </div>

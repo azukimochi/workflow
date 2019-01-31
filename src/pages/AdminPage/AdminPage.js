@@ -9,8 +9,8 @@ class AdminPage extends Component {
     render() {
         return (
             <div className="container">
-            <div>Admin Page</div>
-            <button onClick={this.handleClick}>Set up Workflow</button>
+                <div>Admin Page</div>
+                <button onClick={this.handleClick}>Set up Workflow</button>
             </div>
         )
     }

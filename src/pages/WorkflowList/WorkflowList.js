@@ -31,16 +31,16 @@ class WorkflowList extends Component {
     state = {
         modalIsOpen: false
     }
-    
+
     id2List = {
-        droppable: 'availableActions',
-        droppable2: 'selectedActions'
+        droppable: "availableActions",
+        droppable2: "selectedActions"
     }
 
     componentDidMount = () => {
         this.getSavedData()
     }
-    
+
     getSavedData = () => {
         let savedData = JSON.parse(localStorage.getItem("savedWorkFlow"))
         if (savedData) {
@@ -50,12 +50,12 @@ class WorkflowList extends Component {
             })
         } else {
             this.setState({
-                availableActions: workFlowStages.filter(stage => !stage.prevStage && !stage.nextStage), 
+                availableActions: workFlowStages.filter(stage => !stage.prevStage && !stage.nextStage),
                 selectedActions: workFlowStages.filter(stage => stage.prevStage || stage.nextStage)
             })
         }
     }
-  
+
     getList = id => this.state[this.id2List[id]];
 
     onDragEnd = result => {
@@ -94,6 +94,11 @@ class WorkflowList extends Component {
         }
     };
 
+    handleDiscard = event => {
+        this.getSavedData()
+        this.closeModal()
+    }
+
     handleSave = event => {
         let cleanedAvailActions = this.cleanTheAvailable(this.state.availableActions)
         let cleanedSelectedActions = this.cleanTheSelected(this.state.selectedActions)
@@ -106,7 +111,7 @@ class WorkflowList extends Component {
     }
 
     cleanTheAvailable = data => {
-        for (let i = 0; i< data.length; i++) {
+        for (let i = 0; i < data.length; i++) {
             data[i].isStart = false
             data[i].prevStage = null
             data[i].nextStage = null
@@ -117,20 +122,15 @@ class WorkflowList extends Component {
     cleanTheSelected = data => {
         for (let i = 0; i < data.length; i++) {
             if (i === 0) {
-                data[i].isStart = true 
+                data[i].isStart = true
                 data[i].prevStage = null
             } else {
                 data[i].isStart = false
-                data[i].prevStage = data[i-1].id
-                data[i].nextStage = data[i+1] ? data[i+1].id : null
+                data[i].prevStage = data[i - 1].id
+                data[i].nextStage = data[i + 1] ? data[i + 1].id : null
             }
         }
         return data
-    }
-
-    handleDiscard = event => {
-        this.getSavedData()
-        this.closeModal()
     }
 
     goToAdminPage = event => {
@@ -139,59 +139,59 @@ class WorkflowList extends Component {
     }
 
     openModal = () => {
-        this.setState({modalIsOpen: true},
-        () => console.log("modal is open"));
-      }
-     
-      afterOpenModal = () => {
+        this.setState({ modalIsOpen: true })
+    }
+
+    afterOpenModal = () => {
         this.subtitle.style.color = '#f00';
-      }
-     
-      closeModal = () => {
-        this.setState({modalIsOpen: false});
-      }
+    }
+
+    closeModal = () => {
+        this.setState({ modalIsOpen: false });
+    }
 
     render() {
         if (this.state.availableActions && this.state.selectedActions) {
-        return (
-            <div className="container">
+            return (
+                <div className="container">
 
-            <DragNDropCanvasses
-            onDragEnd={this.onDragEnd}
-            availableActions={this.state.availableActions}
-            selectedActions={this.state.selectedActions}
-            />
+                    <DragNDropCanvasses
+                        onDragEnd={this.onDragEnd}
+                        availableActions={this.state.availableActions}
+                        selectedActions={this.state.selectedActions}
+                    />
 
-            <div>
-                <button onClick={this.handleSave}>Save</button>
-                <button onClick={this.openModal}>Cancel</button>
-                <button onClick={this.goToAdminPage}>Go to the Admin Page</button>
+                    <div>
+                        <button onClick={this.handleSave}>Save</button>
+                        <button onClick={this.openModal}>Cancel</button>
+                        <button onClick={this.goToAdminPage}>Go to the Admin Page</button>
+                    </div>
+                    
+                    <div>
+
+                        <CancelModal
+                            modalIsOpen={this.state.modalIsOpen}
+                            closeModal={this.closeModal}
+                            handleDiscard={this.handleDiscard}
+                        />
+
+                        <ToastContainer
+                            position="top-center"
+                            autoClose={1500}
+                            hideProgressBar={false}
+                            newestOnTop={false}
+                            closeOnClick
+                            rtl={false}
+                            pauseOnVisibilityChange
+                            draggable
+                            pauseOnHover
+                        />
+                    </div>
                 </div>
-
-            <div>
-            <CancelModal
-            modalIsOpen={this.state.modalIsOpen}
-            closeModal={this.closeModal}
-            handleDiscard={this.handleDiscard}
-          />
-
-          <ToastContainer 
-          position="top-center"
-          autoClose={1500}
-          hideProgressBar={false}
-          newestOnTop={false}
-          closeOnClick
-          rtl={false}
-          pauseOnVisibilityChange
-          draggable
-          pauseOnHover
-          />
-            </div>
-    </div>
-        )
-    } else {
-        return null
-    }
+            )
+        } else {
+            return null
+        }
     }
 }
 

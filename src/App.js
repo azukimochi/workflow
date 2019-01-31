@@ -7,9 +7,9 @@ const App = () => (
   <Router>
     <div>
       <Switch>
-      <Route exact path="/"component={AdminPage} />
-      <Route exact path="/workflow" component={WorkflowList} />
-      <Route exact path="*" component={AdminPage} />
+        <Route exact path="/" component={AdminPage} />
+        <Route exact path="/workflow" component={WorkflowList} />
+        <Route exact path="*" component={AdminPage} />
       </Switch>
     </div>
   </Router>

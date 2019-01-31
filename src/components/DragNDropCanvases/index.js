@@ -1,1 +1,1 @@
-export {default} from './DragNDropCanvases'
+export {default} from "./DragNDropCanvases"
