@@ -1,0 +1,21 @@
+#canvases {
+    position: relative;
+    top: 25em;
+    width: 60%;
+}
+
+h3 {
+    text-align: center;
+}
+
+.tiles {
+    border: 0.5px solid darkgrey;
+    border-radius: 7px;
+    font-family: sans-serif;
+    font-size: 14px;
+}
+
+.canvas {
+    border: 0.5px solid orange;
+    border-radius: 7px;
+}

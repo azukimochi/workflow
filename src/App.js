@@ -12,7 +12,7 @@ const App = () => (
         <Route exact path="/workflow" component={WorkflowList} />
         <Route exact path="*" component={AdminPage} />
       </Switch>
-    <Footer />
+      <Footer />
     </div>
   </Router>
 );

@@ -4,6 +4,7 @@ import CancelModal from "../../components/CancelModal/CancelModal"
 import DragNDropCanvasses from "../../components/DragNDropCanvases/DragNDropCanvases"
 import { ToastContainer, toast } from 'react-toastify'
 import 'react-toastify/dist/ReactToastify.css'
+import "./Workflow.css"
 
 const workFlowStages = Workflow.Stages
 
@@ -153,20 +154,46 @@ class WorkflowList extends Component {
     render() {
         if (this.state.availableActions && this.state.selectedActions) {
             return (
-                <div className="container">
-
-                    <DragNDropCanvasses
-                        onDragEnd={this.onDragEnd}
-                        availableActions={this.state.availableActions}
-                        selectedActions={this.state.selectedActions}
-                    />
-
-                    <div>
-                        <button onClick={this.handleSave}>Save</button>
-                        <button onClick={this.openModal}>Cancel</button>
-                        <button onClick={this.goToAdminPage}>Go to the Admin Page</button>
+                <div id="workflowContainer">
+                    <div className="row">
+                        <DragNDropCanvasses
+                            onDragEnd={this.onDragEnd}
+                            availableActions={this.state.availableActions}
+                            selectedActions={this.state.selectedActions}
+                        />
                     </div>
-                    
+                    <div id="btnContainer">
+                        <div className="row">
+                            <div className="col-xl-4 offset-xl-4">
+                                <div className="row">
+                                    <div className="col">
+                                        <div className="ui green animated button" tabIndex="0" onClick={this.handleSave}>
+                                            <div className="visible content">Save</div>
+                                            <div className="hidden content">
+                                                <i className="save icon"></i>
+                                            </div>
+                                        </div>
+                                    </div>
+
+
+
+                                    <div className="col">
+                                        <button className="ui red button" onClick={this.openModal}>
+                                            Cancel
+                                        </button>
+                                    </div>
+
+                                    <div className="col">
+                                        <button className="ui primary button" onClick={this.goToAdminPage}>
+                                            Admin Page
+                                        </button>
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
                     <div>
 
                         <CancelModal

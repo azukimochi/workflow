@@ -1,20 +1,21 @@
 import React from "react"
 import { DragDropContext, Droppable, Draggable } from 'react-beautiful-dnd';
+import "./DragNDropCanvases.css"
 
 const grid = 8;
 
 const getItemStyle = (isDragging, draggableStyle) => ({
     userSelect: 'none',
     padding: grid * 2,
-    margin: `0 0 ${grid}px 0`,
+    margin: `0 2 ${grid}px 0`,
 
-    background: isDragging ? 'lightgreen' : 'grey',
+    background: isDragging ? 'coral' : 'grey',
 
     ...draggableStyle
 });
 
 const getListStyle = isDraggingOver => ({
-    background: isDraggingOver ? 'lightblue' : 'lightgrey',
+    background: isDraggingOver ? 'darkgrey' : 'orange',
     display: 'flex',
     padding: grid,
     overflow: 'auto',
@@ -23,10 +24,12 @@ const getListStyle = isDraggingOver => ({
 const DragNDropCanvasses = props => {
     return (
         <div className="container">
+        <div id="canvases">
             <DragDropContext onDragEnd={props.onDragEnd}>
+                <h3>Available Actions</h3>
                 <Droppable droppableId="droppable" direction="horizontal">
                     {(provided, snapshot) => (
-                        <div
+                        <div className="canvas"
                             ref={provided.innerRef}
                             style={getListStyle(snapshot.isDraggingOver)}
                             {...provided.droppableProps}
@@ -37,7 +40,7 @@ const DragNDropCanvasses = props => {
                                     draggableId={item.id}
                                     index={index}>
                                     {(provided, snapshot) => (
-                                        <div
+                                        <div className="tiles"
                                             ref={provided.innerRef}
                                             {...provided.draggableProps}
                                             {...provided.dragHandleProps}
@@ -55,9 +58,10 @@ const DragNDropCanvasses = props => {
                     )}
                 </Droppable>
                 <br />
+                <h3>Your Workflow</h3>
                 <Droppable droppableId="droppable2" direction="horizontal">
                     {(provided, snapshot) => (
-                        <div
+                        <div className="canvas"
                             ref={provided.innerRef}
                             style={getListStyle(snapshot.isDraggingOver)}
                             {...provided.droppableProps}
@@ -68,7 +72,7 @@ const DragNDropCanvasses = props => {
                                     draggableId={item.id}
                                     index={index}>
                                     {(provided, snapshot) => (
-                                        <div className="horizontal"
+                                        <div className="tiles"
                                             ref={provided.innerRef}
                                             {...provided.draggableProps}
                                             {...provided.dragHandleProps}
@@ -86,6 +90,7 @@ const DragNDropCanvasses = props => {
                     )}
                 </Droppable>
             </DragDropContext>
+        </div>
         </div>
     )
 }
