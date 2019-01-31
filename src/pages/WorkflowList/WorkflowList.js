@@ -95,9 +95,37 @@ class WorkflowList extends Component {
     };
 
     handleSave = event => {
-        let dataStr = JSON.stringify(this.state)
+        let cleanedAvailActions = this.cleanTheAvailable(this.state.availableActions)
+        let cleanedSelectedActions = this.cleanTheSelected(this.state.selectedActions)
+        let dataStr = JSON.stringify({
+            availableActions: cleanedAvailActions,
+            selectedActions: cleanedSelectedActions
+        })
         localStorage.setItem("savedWorkFlow", dataStr)
         toast.success("Saving...")
+    }
+
+    cleanTheAvailable = data => {
+        for (let i = 0; i< data.length; i++) {
+            data[i].isStart = false
+            data[i].prevStage = null
+            data[i].nextStage = null
+        }
+        return data
+    }
+
+    cleanTheSelected = data => {
+        for (let i = 0; i < data.length; i++) {
+            if (i === 0) {
+                data[i].isStart = true 
+                data[i].prevStage = null
+            } else {
+                data[i].isStart = false
+                data[i].prevStage = data[i-1].id
+                data[i].nextStage = data[i+1] ? data[i+1].id : null
+            }
+        }
+        return data
     }
 
     handleDiscard = event => {
